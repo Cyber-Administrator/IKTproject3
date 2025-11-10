@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Kapcsolat — Adam's Travel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="icon" href="PICS/logo.png" type="image/x-icon">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <span class="brand-logo">🌍</span>
+        <span class="ms-2">Adam's Travel</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav4" aria-controls="nav4" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="nav4">
+        <ul class="navbar-nav ms-auto me-3">
+          <li class="nav-item"><a class="nav-link" href="index.html">Főoldal</a></li>
+          <li class="nav-item"><a class="nav-link active" href="kapcsolat.html">Kapcsolat</a></li>
+        </ul>
+
+        <button class="btn btn-outline-light position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas">
+          Kosár
+          <span id="cartBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="cartOffcanvasLabel">Kosár — Adam's Travel</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Bezár"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column">
+      <div id="cartItemsContainer" class="list-group mb-3"></div>
+
+      <div class="mt-auto">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="fw-bold">Végösszeg:</div>
+          <div id="cartTotal" class="fs-5 fw-bold">0 Ft</div>
+        </div>
+        <div class="d-flex gap-2">
+          <button id="clearCartBtn" class="btn btn-outline-secondary w-50">Törlés</button>
+          <button id="payCartBtn" class="btn btn-primary w-50">Fizetés</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="py-5">
+    <div class="container">
+      <h1 class="mb-4">Kapcsolat</h1>
+      <div class="row">
+        <div class="col-md-5">
+          <div class="card shadow-sm mb-4">
+            <div class="card-body">
+              <h5>Elérhetőség</h5>
+              <p class="mb-1"><strong>Email:</strong> <a href="mailto:info@adamstravel.com">info@adamstravel.com</a></p>
+              <p class="mb-1"><strong>Telefon:</strong> +36 20 974 8445</p>
+              <p class="mb-0"><strong>Cím:</strong> 1055 Budapest, Fő utca 1.</p>
+            </div>
+          </div>
+
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5>Nyitvatartás</h5>
+              <p class="mb-0">H–P: 9:00–18:00</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-7">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Írj nekünk</h5>
+              <form id="contactForm" novalidate>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Név</label>
+                  <input type="text" class="form-control" id="name" required>
+                  <div class="invalid-feedback">Kérlek add meg a neved.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">E-mail</label>
+                  <input type="email" class="form-control" id="email" required>
+                  <div class="invalid-feedback">Kérlek adj meg érvényes e-mail címet.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="message" class="form-label">Üzenet</label>
+                  <textarea class="form-control" id="message" rows="6" required></textarea>
+                  <div class="invalid-feedback">Kérlek írd meg üzenetedet.</div>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <button type="button" onclick="history.back()" class="btn btn-outline-secondary">Vissza</button>
+                  <button type="submit" class="btn btn-primary">Küldés</button>
+                </div>
+              </form>
+              <div id="formAlert" class="alert alert-success mt-3 d-none" role="alert">Köszönjük! Üzenetedet megkaptuk. Hamarosan válaszolunk.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-primary text-white py-3">
+    <div class="container d-flex justify-content-between">
+      <div>© 2025 Adam's Travel</div>
+      <div class="small">info@adamstravel.com · +36 20 974 8445</div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="JS/cart.js"></script>
+  <script>
+  
+    (function () {
+      const form = document.getElementById('contactForm');
+      const alertBox = document.getElementById('formAlert');
+      if (!form) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) {
+          form.classList.add('was-validated');
+          return;
+        }
+        alertBox.classList.remove('d-none');
+        form.reset();
+        form.classList.remove('was-validated');
+      });
+    })();
+  </script>
+</body>
+</html>
